@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import 'semantic-ui-css/semantic.min.css';
 import DashboardPage from './pages/dashboard/dashboard.page';
 
 function App() {

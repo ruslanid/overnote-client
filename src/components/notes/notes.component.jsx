@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {} from './notes.styles';
+import './notes.styles.scss';
+
 import NoteItem from '../note-item/note-item.component';
 
 const Notes = ({notes}) => (

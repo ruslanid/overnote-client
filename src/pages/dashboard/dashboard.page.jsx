@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {} from './dashboard.styles';
+import './dashboard.styles.scss';
 
 import Categories from '../../components/categories/categories.component';
 import Notes from '../../components/notes/notes.component';

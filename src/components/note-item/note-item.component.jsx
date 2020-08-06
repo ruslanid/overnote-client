@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {} from './note-item.styles';
+import './note-item.styles.scss';
 
 const NoteItem = ({note: {title, body}}) => (
   <div className="note-item">
