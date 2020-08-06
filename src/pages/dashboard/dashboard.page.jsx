@@ -1,13 +1,21 @@
 import React from 'react';
 
-import {
+import {} from './dashboard.styles';
 
-} from './dashboard.styles';
+import Categories from '../../components/categories/categories.component';
+import Notes from '../../components/notes/notes.component';
 
-const DashboardPage = () => (
-  <div className="dashboard-page">
-    Dashboard
-  </div>
-);
+import {categories, notes} from '../../dummy-data';
+
+const DashboardPage = () => {
+  
+  
+  return (
+    <div className="dashboard-page">
+      <Categories categories={categories} />
+      <Notes notes={notes} />
+    </div>
+  )
+};
 
 export default DashboardPage;
