@@ -24,7 +24,7 @@ const DashboardPage = ({ dispatch, categories }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  categories: selectAllCategories
+  categories: selectAllCategories,
 });
 
 export default connect(mapStateToProps)(DashboardPage);

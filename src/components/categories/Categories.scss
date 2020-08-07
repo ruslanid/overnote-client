@@ -1,24 +1,7 @@
 .Categories {
-  width: 20%;
-  height: 100vh;
-  border-right: 1px #b2babb solid;
-
   .menu {
-    width: 100% !important;
-    padding: 10px 25px !important;
-  }
-
-  // .header {
-  //   color: #17A589 !important;
-  //   font-size: 25px !important;
-  // }
-
-  .empty {
-    margin: 15px 0;
-  }
-
-  .item {
-    font-size: 16px;
-    margin: 5px 0 !important;
+    border-radius: 0 !important;
+    height: 100vh;
+    width: 300px !important;
   }
 }

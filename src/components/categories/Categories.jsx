@@ -10,7 +10,7 @@ const Categories = ({ categories }) => {
 
   return (
     <div className="Categories">
-      <Menu text vertical>
+      <Menu inverted vertical>
         <Menu.Item>
           <Header as="h3" color="red">
             Categories
