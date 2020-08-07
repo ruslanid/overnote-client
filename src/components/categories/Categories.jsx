@@ -6,7 +6,7 @@ import "./Categories.scss";
 const Categories = ({ categories }) => {
   const [activeCategory, setActiveCategory] = useState("");
 
-  const handleItemClick = (e, { name }) => setActiveCategory(name);
+  const handleItemClick = (error, { name }) => setActiveCategory(name);
 
   return (
     <div className="Categories">
@@ -16,9 +16,7 @@ const Categories = ({ categories }) => {
             Categories
           </Header>
         </Menu.Item>
-        {categories.length === 0 ? (
-          <div className="empty">* No categories yet</div>
-        ) : null}
+        {categories.length === 0 && <Menu.Item>No categories</Menu.Item>}
         {categories.map(({ id, name }) => (
           <Menu.Item
             key={id}
