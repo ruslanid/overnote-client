@@ -13,7 +13,7 @@ import { selectAllCategories } from "../../redux/categories/categoriesSelectors"
 const DashboardPage = ({ dispatch, categories }) => {
   useEffect(() => {
     dispatch(fetchCategories());
-  }, [fetchCategories]);
+  }, [dispatch]);
 
   return (
     <div className="DashboardPage">

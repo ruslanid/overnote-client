@@ -2,7 +2,9 @@ import CategoriesActionTypes from "./categoriesActionTypes";
 
 const INITIAL_STATE = {
   allCategories: [],
+  isAdding: false,
   errorsFetching: {},
+  errorsAdding: {}
 };
 
 const categoriesReducer = (state = INITIAL_STATE, action) => {
@@ -23,6 +25,24 @@ const categoriesReducer = (state = INITIAL_STATE, action) => {
         ...state,
         errorsFetching: action.payload,
       };
+    case CategoriesActionTypes.ADD_CATEGORY_START:
+      return {
+        ...state,
+        isAdding: true
+      };
+    case CategoriesActionTypes.ADD_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        isAdding: false,
+        allCategories: [...state.allCategories, action.payload],
+        errorsAdding: {}
+      }
+    case CategoriesActionTypes.ADD_CATEGORY_FAILURE:
+      return {
+        ...state,
+        isAdding: false,
+        errorsAdding: action.payload
+      }
     default:
       return state;
   }
