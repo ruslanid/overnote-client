@@ -18,7 +18,7 @@ const AddCategory = ({ dispatch, isAdding, errors }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setCategory({...category, title: ""});
+    setCategory({ ...category, title: "" });
     dispatch(addCategory(category));
   };
 

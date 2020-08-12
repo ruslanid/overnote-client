@@ -16,3 +16,8 @@ export const selectErrorsAdding = createSelector(
   [selectCategories],
   (categories) => categories.errorsAdding
 );
+
+export const selectIsDeleting = createSelector(
+  [selectCategories],
+  (categories) => categories.isDeleting
+);

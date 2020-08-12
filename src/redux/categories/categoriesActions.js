@@ -56,3 +56,31 @@ export const addCategory = (category) => {
       .catch((error) => dispatch(addCategoryFailure(error.response.data)));
   };
 };
+
+//
+// DELETE CATEGORY
+//
+const deleteCategoryStart = () => ({
+  type: CategoriesActionTypes.DELETE_CATEGORY_START,
+});
+
+const deleteCategorySuccess = (category) => ({
+  type: CategoriesActionTypes.DELETE_CATEGORY_SUCCESS,
+  payload: category,
+});
+
+const deleteCategoryFailure = (error) => ({
+  type: CategoriesActionTypes.DELETE_CATEGORY_FAILURE,
+  payload: error,
+});
+
+export const deleteCategory = (category) => {
+  return (dispatch) => {
+    dispatch(deleteCategoryStart());
+
+    axios
+      .delete(`/api/categories/${category.id}`)
+      .then((res) => dispatch(deleteCategorySuccess(category)))
+      .catch((error) => dispatch(deleteCategoryFailure(error.response.data)));
+  };
+};
