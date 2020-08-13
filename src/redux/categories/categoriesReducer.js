@@ -1,12 +1,17 @@
 import CategoriesActionTypes from "./categoriesActionTypes";
 
+import { updateCategory } from "./categoriesUtils";
+
 const INITIAL_STATE = {
   allCategories: [],
+  editHidden: true,
   isAdding: false,
   isDeleting: false,
+  isUpdating: false,
   errorsFetching: {},
   errorsAdding: {},
   errorsDeleting: {},
+  errorsUpdating: {},
 };
 
 const categoriesReducer = (state = INITIAL_STATE, action) => {
@@ -45,6 +50,31 @@ const categoriesReducer = (state = INITIAL_STATE, action) => {
         isAdding: false,
         errorsAdding: action.payload,
       };
+    case CategoriesActionTypes.TOGGLE_EDIT_CATEGORY_HIDDEN:
+      return {
+        ...state,
+        editHidden: action.payload,
+        errorsUpdating: action.payload === true && {} 
+      };
+    case CategoriesActionTypes.UPDATE_CATEGORY_START:
+      return {
+        ...state,
+        isUpdating: true,
+      };
+    case CategoriesActionTypes.UPDATE_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+        editHidden: true,
+        allCategories: updateCategory(state.allCategories, action.payload),
+        errorsUpdating: {},
+      };
+    case CategoriesActionTypes.UPDATE_CATEGORY_FAILURE:
+      return {
+        ...state,
+        isUpdating: false,
+        errorsUpdating: action.payload,
+      };
     case CategoriesActionTypes.DELETE_CATEGORY_START:
       return {
         ...state,
@@ -54,14 +84,16 @@ const categoriesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isDeleting: false,
-        allCategories: state.allCategories.filter(category => category !== action.payload)
-      }
+        allCategories: state.allCategories.filter(
+          (category) => category !== action.payload
+        ),
+      };
     case CategoriesActionTypes.DELETE_CATEGORY_FAILURE:
       return {
         ...state,
         isDeleting: false,
-        errorsDeleting: action.payload
-      }
+        errorsDeleting: action.payload,
+      };
     default:
       return state;
   }

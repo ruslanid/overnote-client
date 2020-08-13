@@ -58,6 +58,42 @@ export const addCategory = (category) => {
 };
 
 //
+// TOGGLE EDIT HIDDEN
+//
+export const toggleEditHidden = (toggleValue) => ({
+  type: CategoriesActionTypes.TOGGLE_EDIT_CATEGORY_HIDDEN,
+  payload: toggleValue,
+});
+
+//
+// UPDATE CATEGORY
+//
+const updateCategoryStart = () => ({
+  type: CategoriesActionTypes.UPDATE_CATEGORY_START,
+});
+
+const updateCategorySuccess = (category) => ({
+  type: CategoriesActionTypes.UPDATE_CATEGORY_SUCCESS,
+  payload: category,
+});
+
+const updateCategoryFailure = (error) => ({
+  type: CategoriesActionTypes.UPDATE_CATEGORY_FAILURE,
+  payload: error,
+});
+
+export const updateCategory = (category) => {
+  return (dispatch) => {
+    dispatch(updateCategoryStart());
+
+    axios
+      .put(`/api/categories/${category.id}`, category)
+      .then((res) => dispatch(updateCategorySuccess(res.data)))
+      .catch((error) => dispatch(updateCategoryFailure(error.response.data)));
+  };
+};
+
+//
 // DELETE CATEGORY
 //
 const deleteCategoryStart = () => ({

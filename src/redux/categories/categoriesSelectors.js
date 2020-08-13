@@ -21,3 +21,18 @@ export const selectIsDeleting = createSelector(
   [selectCategories],
   (categories) => categories.isDeleting
 );
+
+export const selectEditHidden = createSelector(
+  [selectCategories],
+  (categories) => categories.editHidden
+);
+
+export const selectIsUpdating = createSelector(
+  [selectCategories],
+  (categories) => categories.isUpdating
+);
+
+export const selectErrorsUpdating = createSelector(
+  [selectCategories],
+  (categories) => categories.errorsUpdating
+);

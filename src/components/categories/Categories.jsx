@@ -8,10 +8,17 @@ import "./Categories.scss";
 import AddCategory from "../add-category/AddCategory";
 import Category from "../category/Category";
 
-import { deleteCategory } from "../../redux/categories/categoriesActions";
-import { selectIsDeleting } from "../../redux/categories/categoriesSelectors";
+import {
+  deleteCategory,
+  toggleEditHidden,
+} from "../../redux/categories/categoriesActions";
 
-const Categories = ({ categories, dispatch, isDeleting }) => {
+import {
+  selectIsDeleting,
+  selectEditHidden,
+} from "../../redux/categories/categoriesSelectors";
+
+const Categories = ({ categories, dispatch, isDeleting, editHidden }) => {
   const [activeCategory, setActiveCategory] = useState(null);
 
   const handleItemClick = (error, { name }) => setActiveCategory(name);
@@ -20,11 +27,15 @@ const Categories = ({ categories, dispatch, isDeleting }) => {
     dispatch(deleteCategory(category));
   };
 
+  const handleEdit = (toggleValue) => {
+    dispatch(toggleEditHidden(toggleValue));
+  };
+
   return (
     <div className="Categories">
       <Menu inverted vertical>
         <Menu.Item>
-          <Header as="h3" color="brown">
+          <Header as="h3" color="red">
             Categories
           </Header>
         </Menu.Item>
@@ -38,6 +49,8 @@ const Categories = ({ categories, dispatch, isDeleting }) => {
             category={category}
             handleDelete={handleDelete}
             isDeleting={isDeleting}
+            editHidden={editHidden}
+            handleEdit={handleEdit}
           />
         ))}
       </Menu>
@@ -47,6 +60,7 @@ const Categories = ({ categories, dispatch, isDeleting }) => {
 
 const mapStateToPros = createStructuredSelector({
   isDeleting: selectIsDeleting,
+  editHidden: selectEditHidden,
 });
 
 export default connect(mapStateToPros)(Categories);
