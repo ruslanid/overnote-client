@@ -36,3 +36,8 @@ export const selectErrorsUpdating = createSelector(
   [selectCategories],
   (categories) => categories.errorsUpdating
 );
+
+export const selectActiveCategory = createSelector(
+  [selectCategories],
+  (categories) => categories.activeCategory
+);

@@ -6,25 +6,30 @@ import "./DashboardPage.scss";
 
 import Categories from "../../components/categories/Categories";
 import Notes from "../../components/notes/Notes";
+import WithLoading from "../../components/with-loading/WithLoading";
 
+import { selectFilteredNotes } from "../../redux/notes/notesSelectors";
+import { fetchRecentNotes } from "../../redux/notes/notesActions";
 import { fetchCategories } from "../../redux/categories/categoriesActions";
-import { selectAllCategories } from "../../redux/categories/categoriesSelectors";
 
-const DashboardPage = ({ dispatch, categories }) => {
+const NotesWithLoading = WithLoading(Notes);
+
+const DashboardPage = ({ dispatch, areNotesLoaded }) => {
   useEffect(() => {
     dispatch(fetchCategories());
+    dispatch(fetchRecentNotes());
   }, [dispatch]);
 
   return (
     <div className="DashboardPage">
-      <Categories categories={categories} />
-      {/* <Notes /> */}
+      <Categories />
+      <NotesWithLoading isLoading={!Boolean(areNotesLoaded)} />
     </div>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
-  categories: selectAllCategories,
+  areNotesLoaded: selectFilteredNotes,
 });
 
 export default connect(mapStateToProps)(DashboardPage);

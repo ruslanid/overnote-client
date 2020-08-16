@@ -1,4 +1,5 @@
 import CategoriesActionTypes from "./categoriesActionTypes";
+import NotesActionTypes from "../notes/notesActionTypes";
 import axios from "axios";
 
 //
@@ -118,5 +119,49 @@ export const deleteCategory = (category) => {
       .delete(`/api/categories/${category.id}`)
       .then((res) => dispatch(deleteCategorySuccess(category)))
       .catch((error) => dispatch(deleteCategoryFailure(error.response.data)));
+  };
+};
+
+//
+// SET ACTIVE CATEGORY
+//
+const setActiveCategory = (name) => ({
+  type: CategoriesActionTypes.SET_ACTIVE_CATEGORY,
+  payload: name,
+});
+
+//
+// FETCH CATEGORY NOTES
+//
+const fetchCategoryNotesStart = () => ({
+  type: NotesActionTypes.FETCH_CATEGORY_NOTES_START,
+});
+
+const fetchCategoryNotesSuccss = (notes) => ({
+  type: NotesActionTypes.FETCH_CATEGORY_NOTES_SUCCESS,
+  payload: notes,
+});
+
+const fetchCategoryNotesFailure = (error) => ({
+  type: NotesActionTypes.FETCH_CATEGORY_NOTES_FAILURE,
+  payload: error,
+});
+
+export const updateActiveCategory = (category) => {
+  return (dispatch, getState) => {
+    dispatch(setActiveCategory(category));
+
+    const {id, title} = category;
+
+    if (!getState().notes.allNotes[title]) {
+      dispatch(fetchCategoryNotesStart());
+
+      axios
+        .get(`/api/categories/${id}/notes`)
+        .then((res) => dispatch(fetchCategoryNotesSuccss({ [title]: res.data })))
+        .catch((error) =>
+          dispatch(fetchCategoryNotesFailure(error.response.data))
+        );
+    }
   };
 };

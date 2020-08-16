@@ -1,6 +1,6 @@
 import CategoriesActionTypes from "./categoriesActionTypes";
 
-import { updateCategory } from "./categoriesUtils";
+import { updateCategory, deleteCategory } from "./categoriesUtils";
 
 const INITIAL_STATE = {
   allCategories: [],
@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   errorsAdding: {},
   errorsDeleting: {},
   errorsUpdating: {},
+  activeCategory: {},
 };
 
 const categoriesReducer = (state = INITIAL_STATE, action) => {
@@ -54,7 +55,7 @@ const categoriesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         editHidden: action.payload,
-        errorsUpdating: action.payload === true && {} 
+        errorsUpdating: action.payload === true && {},
       };
     case CategoriesActionTypes.UPDATE_CATEGORY_START:
       return {
@@ -68,6 +69,7 @@ const categoriesReducer = (state = INITIAL_STATE, action) => {
         editHidden: true,
         allCategories: updateCategory(state.allCategories, action.payload),
         errorsUpdating: {},
+        activeCategory: action.payload,
       };
     case CategoriesActionTypes.UPDATE_CATEGORY_FAILURE:
       return {
@@ -84,15 +86,19 @@ const categoriesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isDeleting: false,
-        allCategories: state.allCategories.filter(
-          (category) => category !== action.payload
-        ),
+        activeCategory: {},
+        allCategories: deleteCategory(state.allCategories, action.payload),
       };
     case CategoriesActionTypes.DELETE_CATEGORY_FAILURE:
       return {
         ...state,
         isDeleting: false,
         errorsDeleting: action.payload,
+      };
+    case CategoriesActionTypes.SET_ACTIVE_CATEGORY:
+      return {
+        ...state,
+        activeCategory: action.payload,
       };
     default:
       return state;

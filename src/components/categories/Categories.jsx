@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Menu, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -11,17 +11,26 @@ import Category from "../category/Category";
 import {
   deleteCategory,
   toggleEditHidden,
+  updateActiveCategory,
 } from "../../redux/categories/categoriesActions";
 
 import {
   selectIsDeleting,
   selectEditHidden,
+  selectActiveCategory,
+  selectAllCategories,
 } from "../../redux/categories/categoriesSelectors";
 
-const Categories = ({ categories, dispatch, isDeleting, editHidden }) => {
-  const [activeCategory, setActiveCategory] = useState(null);
-
-  const handleItemClick = (error, { name }) => setActiveCategory(name);
+const Categories = ({
+  categories,
+  activeCategory,
+  dispatch,
+  isDeleting,
+  editHidden,
+}) => {
+  const handleItemClick = (error, { name }) => {
+    dispatch(updateActiveCategory(name));
+  };
 
   const handleDelete = (category) => {
     dispatch(deleteCategory(category));
@@ -40,7 +49,7 @@ const Categories = ({ categories, dispatch, isDeleting, editHidden }) => {
           </Header>
         </Menu.Item>
         <AddCategory />
-        {categories.length === 0 && <Menu.Item>No categories</Menu.Item>}
+        {categories.length === 0 && <Menu.Item>Loading...</Menu.Item>}
         {categories.map((category) => (
           <Category
             key={category.id}
@@ -59,6 +68,8 @@ const Categories = ({ categories, dispatch, isDeleting, editHidden }) => {
 };
 
 const mapStateToPros = createStructuredSelector({
+  categories: selectAllCategories,
+  activeCategory: selectActiveCategory,
   isDeleting: selectIsDeleting,
   editHidden: selectEditHidden,
 });
