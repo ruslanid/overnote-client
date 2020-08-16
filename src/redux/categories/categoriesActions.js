@@ -89,7 +89,10 @@ export const updateCategory = (category) => {
 
     axios
       .put(`/api/categories/${category.id}`, category)
-      .then((res) => dispatch(updateCategorySuccess(res.data)))
+      .then((res) => {
+        dispatch(updateCategorySuccess(res.data));
+        dispatch(updateActiveCategory(res.data));
+      })
       .catch((error) => dispatch(updateCategoryFailure(error.response.data)));
   };
 };
@@ -125,9 +128,9 @@ export const deleteCategory = (category) => {
 //
 // SET ACTIVE CATEGORY
 //
-const setActiveCategory = (name) => ({
+const setActiveCategory = (category) => ({
   type: CategoriesActionTypes.SET_ACTIVE_CATEGORY,
-  payload: name,
+  payload: category,
 });
 
 //
@@ -151,14 +154,16 @@ export const updateActiveCategory = (category) => {
   return (dispatch, getState) => {
     dispatch(setActiveCategory(category));
 
-    const {id, title} = category;
+    const { id, title } = category;
 
     if (!getState().notes.allNotes[title]) {
       dispatch(fetchCategoryNotesStart());
 
       axios
         .get(`/api/categories/${id}/notes`)
-        .then((res) => dispatch(fetchCategoryNotesSuccss({ [title]: res.data })))
+        .then((res) =>
+          dispatch(fetchCategoryNotesSuccss({ [title]: res.data }))
+        )
         .catch((error) =>
           dispatch(fetchCategoryNotesFailure(error.response.data))
         );

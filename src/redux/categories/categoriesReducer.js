@@ -69,7 +69,6 @@ const categoriesReducer = (state = INITIAL_STATE, action) => {
         editHidden: true,
         allCategories: updateCategory(state.allCategories, action.payload),
         errorsUpdating: {},
-        activeCategory: action.payload,
       };
     case CategoriesActionTypes.UPDATE_CATEGORY_FAILURE:
       return {
