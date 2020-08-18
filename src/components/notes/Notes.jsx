@@ -10,7 +10,7 @@ import Note from "../note/Note";
 import { selectFilteredNotes } from "../../redux/notes/notesSelectors";
 import { selectActiveCategory } from "../../redux/categories/categoriesSelectors";
 
-const Notes = ({ notes, category: {title} }) => (
+const Notes = ({ notes, category: { title } }) => (
   <div className="Notes">
     <Header as="h3" color="red">
       {Boolean(title) ? title : "Recent"}
