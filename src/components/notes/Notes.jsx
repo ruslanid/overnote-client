@@ -6,6 +6,7 @@ import { createStructuredSelector } from "reselect";
 import "./Notes.scss";
 
 import Note from "../note/Note";
+import NoteModal from "../note-modal/NoteModal";
 
 import { selectFilteredNotes } from "../../redux/notes/notesSelectors";
 import { selectActiveCategory } from "../../redux/categories/categoriesSelectors";
@@ -18,7 +19,7 @@ const Notes = ({ notes, category: { title } }) => (
     {notes.length === 0 && <div>No notes</div>}
     <Card.Group>
       {notes.map((note) => (
-        <Note key={note.id} note={note} />
+        <NoteModal key={note.id} note={note} trigger={<Note note={note} />} />
       ))}
     </Card.Group>
   </div>

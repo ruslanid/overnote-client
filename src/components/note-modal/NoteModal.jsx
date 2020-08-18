@@ -1,31 +1,15 @@
 import React from "react";
-import { Button, Modal } from "semantic-ui-react";
+import { Modal } from "semantic-ui-react";
 
-const NoteModal = ({ setShowModal, note }) => {
-  const { title, description } = note;
-
-  const [open, setOpen] = React.useState(true);
-
-  const handleClose = async () => {
-    await setOpen(false);
-    setShowModal(false);
-  };
-
+function NoteModal({ trigger }) {
   return (
     <Modal
-      open={open}
-      size="small"
-      onClose={handleClose}
-    >
-      <Modal.Header>{title}</Modal.Header>
-      <Modal.Content scrolling>{description}</Modal.Content>
-      <Modal.Actions>
-        <Button positive onClick={handleClose}>
-          Close
-        </Button>
-      </Modal.Actions>
-    </Modal>
+      trigger={trigger}
+      header="Reminder!"
+      content="Call Benjamin regarding the reports."
+      actions={["Snooze", { key: "done", content: "Done", positive: true }]}
+    />
   );
-};
+}
 
 export default NoteModal;
