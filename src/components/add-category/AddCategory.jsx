@@ -33,6 +33,9 @@ const AddCategory = ({ dispatch, isAdding, errors }) => {
         action={{ type: "submit", content: "Save", color: "blue" }}
         placeholder="Add category..."
         disabled={isAdding}
+        name="title"
+        value={category.title}
+        onChange={handleChange}
       />
       {errors.title && <p className="errors">{errors.title}</p>}
     </Form>
