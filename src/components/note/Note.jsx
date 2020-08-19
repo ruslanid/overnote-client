@@ -4,11 +4,11 @@ import Moment from "moment";
 
 import "./Note.scss";
 
-const Note = ({ note }) => {
+const Note = ({ note, ...props }) => {
   const { id, title, description, updatedAt } = note;
 
   return (
-    <div className="Note">
+    <div className="Note" {...props}>
       <Card link key={id}>
         <Card.Content>
           <Card.Header>{title}</Card.Header>
