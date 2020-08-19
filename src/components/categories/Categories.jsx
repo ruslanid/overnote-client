@@ -42,13 +42,13 @@ const Categories = ({
 
   return (
     <div className="Categories">
-      <Menu inverted vertical>
+      <Menu vertical>
+        <AddCategory />
         <Menu.Item>
           <Header as="h3" color="red">
             Categories
           </Header>
         </Menu.Item>
-        <AddCategory />
         {categories.length === 0 && <Menu.Item>Loading...</Menu.Item>}
         {categories.map((category) => (
           <Category
