@@ -11,7 +11,7 @@ const Trigger = () => (
 );
 
 const TopBar = () => (
-  <Menu className="TopBar" size="large">
+  <Menu className="TopBar">
     <Menu.Item>
       <span>
         <Icon size="large" name="bug" />

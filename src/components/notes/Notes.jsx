@@ -13,8 +13,8 @@ import { selectActiveCategory } from "../../redux/categories/categoriesSelectors
 
 const Notes = ({ notes, category: { title } }) => (
   <div className="Notes">
-    <Header as="h3" color="red">
-      {Boolean(title) ? title : "Recent"}
+    <Header as="h2" color="grey">
+      {Boolean(title) ? title : "Recent Notes"}
     </Header>
     {notes.length === 0 && <div>No notes</div>}
     <Card.Group>

@@ -45,7 +45,7 @@ const Categories = ({
       <Menu vertical>
         <AddCategory />
         <Menu.Item>
-          <Header as="h3" color="red">
+          <Header as="h3" color="grey">
             Categories
           </Header>
         </Menu.Item>
