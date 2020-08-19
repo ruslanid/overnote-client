@@ -6,7 +6,7 @@ const saveNote = () => {};
 const deleteNote = () => {};
 
 const NoteModal = ({ trigger, note, note: { title } }) => (
-  <Modal trigger={trigger}>
+  <Modal closeIcon trigger={trigger}>
     <Modal.Header>{title}</Modal.Header>
     <Modal.Content>
       <Modal.Description>

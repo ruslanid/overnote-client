@@ -26,7 +26,7 @@ const Category = ({
           active={activeCategory === category}
           onClick={handleItemClick}
         >
-          {title}
+          {title.length > 35 ? `${title.substring(0, 32)}...` : title}
           {title !== "Others" && (
             <Icon
               name="trash alternate outline"
