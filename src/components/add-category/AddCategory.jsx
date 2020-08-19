@@ -29,19 +29,12 @@ const AddCategory = ({ dispatch, isAdding, errors }) => {
 
   return (
     <Form onSubmit={handleSubmit} className="AddCategory">
-      <Form.Group>
-        <Form.Input
-          placeholder="Add new category..."
-          type="text"
-          name="title"
-          value={category.title}
-          onChange={handleChange}
-        />
-        <Form.Button color="blue" disabled={isAdding}>
-          Add
-        </Form.Button>
-      </Form.Group>
-      <p className="errors">{errors.title}</p>
+      <Form.Input
+        action={{ type: "submit", content: "Save", color: "blue" }}
+        placeholder="Add category..."
+        disabled={isAdding}
+      />
+      {errors.title && <p className="errors">{errors.title}</p>}
     </Form>
   );
 };
