@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Header } from "semantic-ui-react";
+import { Button, Card, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -7,6 +7,7 @@ import "./Notes.scss";
 
 import Note from "../note/Note";
 import NoteModal from "../note-modal/NoteModal";
+import NewNoteModal from "../new-note-modal/NewNoteModal";
 
 import { selectFilteredNotes } from "../../redux/notes/notesSelectors";
 import { selectActiveCategory } from "../../redux/categories/categoriesSelectors";
@@ -16,6 +17,7 @@ const Notes = ({ notes, category: { title } }) => (
     <Header as="h2" color="grey">
       {Boolean(title) ? title : "Recent Notes"}
     </Header>
+    <NewNoteModal trigger={<Button color="blue">New Note</Button>} />
     {notes.length === 0 && <div>No notes</div>}
     <Card.Group>
       {notes.map((note) => (

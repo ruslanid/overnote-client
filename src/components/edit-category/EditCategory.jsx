@@ -41,10 +41,14 @@ const EditCategory = ({ category, dispatch, errors, isUpdating }) => {
         value={updatedCategory.title}
         onChange={handleChange}
         action
-        fluid
+        fluid="true"
       >
         <input />
-        <Button size="mini" onClick={() => handleSubmit()} disabled={isUpdating}>
+        <Button
+          size="mini"
+          onClick={() => handleSubmit()}
+          disabled={isUpdating}
+        >
           <Icon name="check" color="green" />
         </Button>
         <Button size="mini" onClick={() => dispatch(toggleEditHidden(true))}>
