@@ -14,7 +14,7 @@ const TopBar = () => (
   <Menu className="TopBar">
     <Menu.Item>
       <span>
-        <Icon size="large" name="bug" />
+        <Icon name="bug" />
         Overnote!
       </span>
     </Menu.Item>
