@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Button, Modal, Form } from "semantic-ui-react";
-import { addNewNote } from "../../redux/notes/notesActions";
+import { Button, Icon, Modal, Form } from "semantic-ui-react";
+import { saveNote } from "../../redux/notes/notesActions";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectActiveCategory } from "../../redux/categories/categoriesSelectors";
 
-const NoteForm = ({ note, dispatch, category }) => {
+const NoteForm = ({ note, dispatch, category, setOpen }) => {
   const [noteData, setNoteData] = useState({
     title: note?.title || "",
     description: note?.description || "",
@@ -20,8 +20,10 @@ const NoteForm = ({ note, dispatch, category }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addNewNote(noteData, category));
+    dispatch(saveNote(noteData, category));
   };
+
+  const deleteNote = () => {};
 
   return (
     <>
@@ -35,7 +37,6 @@ const NoteForm = ({ note, dispatch, category }) => {
               label="Title"
               placeholder="Title..."
               value={title}
-              id="form-input-title"
             />
             <Form.TextArea
               // error="Please enter your last name"
@@ -44,13 +45,21 @@ const NoteForm = ({ note, dispatch, category }) => {
               label="Description"
               placeholder="Description..."
               value={description}
-              id="form-input-description"
             />
           </Form>
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
+        <Button floated="left" onClick={() => deleteNote(false)} color="red">
+          <Icon name="trash" />
+          Delete
+        </Button>
+        <Button onClick={() => setOpen(false)}>
+          <Icon name="remove" />
+          Cancel
+        </Button>
         <Button onClick={handleSubmit} color="blue">
+          <Icon name="save" />
           Save
         </Button>
       </Modal.Actions>

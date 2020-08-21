@@ -1,9 +1,9 @@
-export const addNote = (notes, noteToAdd) => {
-  var oldNotes = notes[noteToAdd.category.title];
+export const saveNote = (notes, noteToSave) => {
+  var oldNotes = notes[noteToSave.category.title];
   if (!oldNotes) oldNotes = [];
 
   return {
     ...notes,
-    [noteToAdd.category.title]: [...oldNotes, noteToAdd],
+    [noteToSave.category.title]: [...oldNotes, noteToSave],
   };
 };

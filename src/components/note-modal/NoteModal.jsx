@@ -1,27 +1,21 @@
-import React from "react";
-import { Button, Modal } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Modal } from "semantic-ui-react";
 import NoteForm from "../note-form/NoteForm";
 
-const saveNote = () => {};
-const deleteNote = () => {};
+const NoteModal = ({ trigger, note, note: { title } }) => {
+  const [open, setOpen] = useState(false);
 
-const NoteModal = ({ trigger, note, category, note: { title } }) => (
-  <Modal closeIcon trigger={trigger}>
-    <Modal.Header>{title}</Modal.Header>
-    <Modal.Content>
-      <Modal.Description>
-        <NoteForm note={note} category={category} />
-      </Modal.Description>
-    </Modal.Content>
-    <Modal.Actions>
-      <Button onClick={() => deleteNote(false)} color="red">
-        Delete
-      </Button>
-      <Button onClick={() => saveNote(false)} color="blue">
-        Save
-      </Button>
-    </Modal.Actions>
-  </Modal>
-);
+  return (
+    <Modal
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+      open={open}
+      trigger={trigger}
+    >
+      <Modal.Header>{title}</Modal.Header>
+      <NoteForm note={note} setOpen={setOpen} />
+    </Modal>
+  );
+};
 
 export default NoteModal;

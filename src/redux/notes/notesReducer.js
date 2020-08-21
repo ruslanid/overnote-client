@@ -1,33 +1,33 @@
 import NotesActionTypes from "./notesActionTypes";
-import { addNote } from "./notesUtils";
+import { saveNote } from "./notesUtils";
 
 const INITIAL_STATE = {
   allNotes: {},
-  isAdding: false,
+  isSaving: false,
   isFetching: false,
-  errorsAdding: {},
+  errorsSaving: {},
   errorsFetching: {},
 };
 
 const notesReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case NotesActionTypes.ADD_NEW_NOTE_START:
+    case NotesActionTypes.SAVE_NOTE_START:
       return {
         ...state,
-        isAdding: true,
-        errorsAdding: {},
+        isSaving: true,
+        errorsSaving: {},
       };
-    case NotesActionTypes.ADD_NEW_NOTE_SUCCESS:
+    case NotesActionTypes.SAVE_NOTE_SUCCESS:
       return {
         ...state,
-        isAdding: false,
-        allNotes: addNote(state.allNotes, action.payload),
+        isSaving: false,
+        allNotes: saveNote(state.allNotes, action.payload),
       };
-    case NotesActionTypes.ADD_NEW_NOTE_FAILURE:
+    case NotesActionTypes.SAVE_NOTE_FAILURE:
       return {
         ...state,
-        isAdding: false,
-        errorsAdding: action.payload,
+        isSaving: false,
+        errorsSaving: action.payload,
       };
     case NotesActionTypes.FETCH_RECENT_NOTES_START:
       return {
