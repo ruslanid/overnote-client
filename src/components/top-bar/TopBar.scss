@@ -3,4 +3,15 @@
 
 .TopBar.ui.menu {
   margin: 0;
+  background: #1678c2;
+  border-radius: 0;
+
+  .item {
+    color: #ffffff;
+    font-size: 16px;
+  }
+
+  .item:hover {
+    color: #ffffff;
+  }
 }
