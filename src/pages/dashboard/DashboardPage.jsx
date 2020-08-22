@@ -9,7 +9,7 @@ import Notes from "../../components/notes/Notes";
 import WithLoading from "../../components/with-loading/WithLoading";
 
 import { selectFilteredNotes } from "../../redux/notes/notesSelectors";
-import { fetchRecentNotes } from "../../redux/notes/notesActions";
+import { fetchAllNotes } from "../../redux/notes/notesActions";
 import { fetchCategories } from "../../redux/categories/categoriesActions";
 
 const NotesWithLoading = WithLoading(Notes);
@@ -17,7 +17,7 @@ const NotesWithLoading = WithLoading(Notes);
 const DashboardPage = ({ dispatch, areNotesLoaded }) => {
   useEffect(() => {
     dispatch(fetchCategories());
-    dispatch(fetchRecentNotes());
+    dispatch(fetchAllNotes());
   }, [dispatch]);
 
   return (

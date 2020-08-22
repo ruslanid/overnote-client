@@ -4,31 +4,31 @@ import axios from "axios";
 //
 // FETCH RECENT NOTES
 //
-const fetchRecentNotesStart = () => ({
-  type: NotesActionTypes.FETCH_RECENT_NOTES_START,
+const fetchAllNotesStart = () => ({
+  type: NotesActionTypes.FETCH_ALL_NOTES_START,
 });
 
-const fetchRecentNotesSuccess = (notes) => ({
-  type: NotesActionTypes.FETCH_RECENT_NOTES_SUCCESS,
+const fetchAllNotesSuccess = (notes) => ({
+  type: NotesActionTypes.FETCH_ALL_NOTES_SUCCESS,
   payload: notes,
 });
 
-const fetchRecentNotesFailure = (error) => ({
-  type: NotesActionTypes.FETCH_RECENT_NOTES_FAILURE,
+const fetchAllNotesFailure = (error) => ({
+  type: NotesActionTypes.FETCH_ALL_NOTES_FAILURE,
   payload: error,
 });
 
-export const fetchRecentNotes = () => {
+export const fetchAllNotes = () => {
   return (dispatch) => {
-    dispatch(fetchRecentNotesStart());
+    dispatch(fetchAllNotesStart());
 
     axios
-      .get("/api/notes", { params: { q: "recent" } })
+      .get("/api/notes")
       .then((res) => {
-        dispatch(fetchRecentNotesSuccess({ recent: res.data }));
+        dispatch(fetchAllNotesSuccess(res.data));
       })
       .catch((error) => {
-        dispatch(fetchRecentNotesFailure(error.response.data));
+        dispatch(fetchAllNotesFailure(error.response.data));
       });
   };
 };
@@ -57,11 +57,9 @@ export const saveNote = (note, category) => {
     axios
       .post(`/api/categories/${category.id}/notes`, note)
       .then((res) => {
-        console.log(res.data);
         dispatch(saveNoteSuccess(res.data));
       })
       .catch((error) => {
-        console.log(error);
         dispatch(saveNoteFailure(error.response.data));
       });
   };

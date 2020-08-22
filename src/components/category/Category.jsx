@@ -27,21 +27,13 @@ const Category = ({
           onClick={handleItemClick}
         >
           {title.length > 35 ? `${title.substring(0, 32)}...` : title}
-          {title !== "Others" && (
-            <Icon
-              name="trash alternate outline"
-              color="grey"
-              onClick={() => handleDelete(category)}
-              disabled={isDeleting && activeCategory === category}
-            />
-          )}
-          {title !== "Others" && (
-            <Icon
-              name="pencil"
-              color="grey"
-              onClick={() => handleEdit(false)}
-            />
-          )}
+          <Icon
+            name="trash alternate outline"
+            color="grey"
+            onClick={() => handleDelete(category)}
+            disabled={isDeleting && activeCategory === category}
+          />
+          <Icon name="pencil" color="grey" onClick={() => handleEdit(false)} />
         </Menu.Item>
       )}
     </div>

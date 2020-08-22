@@ -91,7 +91,6 @@ export const updateCategory = (category) => {
       .put(`/api/categories/${category.id}`, category)
       .then((res) => {
         dispatch(updateCategorySuccess(res.data));
-        dispatch(updateActiveCategory(res.data));
       })
       .catch((error) => dispatch(updateCategoryFailure(error.response.data)));
   };
@@ -128,45 +127,7 @@ export const deleteCategory = (category) => {
 //
 // SET ACTIVE CATEGORY
 //
-const setActiveCategory = (category) => ({
+export const setActiveCategory = (category) => ({
   type: CategoriesActionTypes.SET_ACTIVE_CATEGORY,
   payload: category,
 });
-
-//
-// FETCH CATEGORY NOTES
-//
-const fetchCategoryNotesStart = () => ({
-  type: NotesActionTypes.FETCH_CATEGORY_NOTES_START,
-});
-
-const fetchCategoryNotesSuccss = (notes) => ({
-  type: NotesActionTypes.FETCH_CATEGORY_NOTES_SUCCESS,
-  payload: notes,
-});
-
-const fetchCategoryNotesFailure = (error) => ({
-  type: NotesActionTypes.FETCH_CATEGORY_NOTES_FAILURE,
-  payload: error,
-});
-
-export const updateActiveCategory = (category) => {
-  return (dispatch, getState) => {
-    dispatch(setActiveCategory(category));
-
-    const { id, title } = category;
-
-    if (!getState().notes.allNotes[title]) {
-      dispatch(fetchCategoryNotesStart());
-
-      axios
-        .get(`/api/categories/${id}/notes`)
-        .then((res) =>
-          dispatch(fetchCategoryNotesSuccss({ [title]: res.data }))
-        )
-        .catch((error) =>
-          dispatch(fetchCategoryNotesFailure(error.response.data))
-        );
-    }
-  };
-};

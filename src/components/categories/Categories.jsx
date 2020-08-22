@@ -11,7 +11,7 @@ import Category from "../category/Category";
 import {
   deleteCategory,
   toggleEditHidden,
-  updateActiveCategory,
+  setActiveCategory,
 } from "../../redux/categories/categoriesActions";
 
 import {
@@ -29,7 +29,7 @@ const Categories = ({
   editHidden,
 }) => {
   const handleItemClick = (error, { name }) => {
-    dispatch(updateActiveCategory(name));
+    dispatch(setActiveCategory(name));
   };
 
   const handleDelete = (category) => {

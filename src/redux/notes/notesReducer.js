@@ -2,8 +2,8 @@ import NotesActionTypes from "./notesActionTypes";
 import { saveNote } from "./notesUtils";
 
 const INITIAL_STATE = {
-  allNotes: {},
-  isSaving: false,
+  allNotes: [],
+  isAdding: false,
   isFetching: false,
   errorsSaving: {},
   errorsFetching: {},
@@ -29,37 +29,19 @@ const notesReducer = (state = INITIAL_STATE, action) => {
         isSaving: false,
         errorsSaving: action.payload,
       };
-    case NotesActionTypes.FETCH_RECENT_NOTES_START:
+    case NotesActionTypes.FETCH_ALL_NOTES_START:
       return {
         ...state,
         isFetching: true,
         errorsFetching: {},
       };
-    case NotesActionTypes.FETCH_RECENT_NOTES_SUCCESS:
+    case NotesActionTypes.FETCH_ALL_NOTES_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        allNotes: { ...state.allNotes, ...action.payload },
+        allNotes: action.payload,
       };
-    case NotesActionTypes.FETCH_RECENT_NOTES_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
-        errorsFetching: action.payload,
-      };
-    case NotesActionTypes.FETCH_CATEGORY_NOTES_START:
-      return {
-        ...state,
-        isFetching: true,
-        errorsFetching: {},
-      };
-    case NotesActionTypes.FETCH_CATEGORY_NOTES_SUCCESS:
-      return {
-        ...state,
-        isFetching: false,
-        allNotes: { ...state.allNotes, ...action.payload },
-      };
-    case NotesActionTypes.FETCH_CATEGORY_NOTES_FAILURE:
+    case NotesActionTypes.FETCH_ALL_NOTES_FAILURE:
       return {
         ...state,
         isFetching: false,

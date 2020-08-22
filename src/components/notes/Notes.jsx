@@ -15,7 +15,7 @@ import { selectActiveCategory } from "../../redux/categories/categoriesSelectors
 const Notes = ({ notes, category: { title } }) => (
   <div className="Notes">
     <Header as="h2" color="grey">
-      {Boolean(title) ? title : "Recent Notes"}
+      {Boolean(title) ? title : "All Notes"}
     </Header>
     <NewNoteModal
       trigger={
