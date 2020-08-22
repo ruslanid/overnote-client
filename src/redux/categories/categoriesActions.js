@@ -1,6 +1,13 @@
 import CategoriesActionTypes from "./categoriesActionTypes";
-import NotesActionTypes from "../notes/notesActionTypes";
 import axios from "axios";
+
+//
+// SET ACTIVE CATEGORY
+//
+export const setActiveCategory = (category) => ({
+  type: CategoriesActionTypes.SET_ACTIVE_CATEGORY,
+  payload: category,
+});
 
 //
 // FETCH CATEGORIES
@@ -53,7 +60,10 @@ export const addCategory = (category) => {
 
     axios
       .post("/api/categories", category)
-      .then((res) => dispatch(addCategorySuccess(res.data)))
+      .then((res) => {
+        dispatch(addCategorySuccess(res.data));
+        dispatch(setActiveCategory(res.data));
+      })
       .catch((error) => dispatch(addCategoryFailure(error.response.data)));
   };
 };
@@ -123,11 +133,3 @@ export const deleteCategory = (category) => {
       .catch((error) => dispatch(deleteCategoryFailure(error.response.data)));
   };
 };
-
-//
-// SET ACTIVE CATEGORY
-//
-export const setActiveCategory = (category) => ({
-  type: CategoriesActionTypes.SET_ACTIVE_CATEGORY,
-  payload: category,
-});
