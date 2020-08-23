@@ -32,7 +32,10 @@ export const fetchCategories = () => {
 
     axios
       .get("/api/categories")
-      .then((res) => dispatch(fetchCategoriesSuccess(res.data)))
+      .then((res) => {
+        dispatch(fetchCategoriesSuccess([{id: 0, title: "All Notes"}, ...res.data]));
+        dispatch(setActiveCategory({id: 0, title: "All Notes"}));
+      })
       .catch((error) => dispatch(fetchCategoriesFailure(error.response.data)));
   };
 };

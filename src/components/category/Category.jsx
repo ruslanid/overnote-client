@@ -18,22 +18,30 @@ const Category = ({
 
   return (
     <div className="Category">
-      {!editHidden && activeCategory === category ? (
+      {!editHidden && activeCategory === category && category.id !== 0 ? (
         <EditCategory category={category} />
       ) : (
         <Menu.Item
           name={category}
-          active={activeCategory === category}
+          active={activeCategory.id === category.id}
           onClick={handleItemClick}
         >
           {title.length > 35 ? `${title.substring(0, 32)}...` : title}
-          <Icon
-            name="trash alternate outline"
-            color="grey"
-            onClick={() => handleDelete(category)}
-            disabled={isDeleting && activeCategory === category}
-          />
-          <Icon name="pencil" color="grey" onClick={() => handleEdit(false)} />
+          {category.id !== 0 && (
+            <Icon
+              name="trash alternate outline"
+              color="grey"
+              onClick={() => handleDelete(category)}
+              disabled={isDeleting && activeCategory === category}
+            />
+          )}
+          {category.id !== 0 && (
+            <Icon
+              name="pencil"
+              color="grey"
+              onClick={() => handleEdit(false)}
+            />
+          )}
         </Menu.Item>
       )}
     </div>

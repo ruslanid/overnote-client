@@ -7,7 +7,7 @@ export const selectFilteredNotes = createSelector(
   [selectNotes, selectCategories],
   (notes, categories) => {
     const activeCategory = categories.activeCategory;
-    return Object.keys(activeCategory).length === 0
+    return activeCategory.id === 0
       ? notes.allNotes
       : notes.allNotes.filter(
           (note) => note.category?.title === activeCategory.title
