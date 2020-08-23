@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "semantic-ui-react";
 import NoteForm from "../note-form/NoteForm";
 
-const NoteModal = ({ trigger, note, note: { title } }) => {
+const NoteModal = ({ trigger, note }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ const NoteModal = ({ trigger, note, note: { title } }) => {
       open={open}
       trigger={trigger}
     >
-      <Modal.Header>{title}</Modal.Header>
+      <Modal.Header>{`${note ? "Edit": "New"}`} Note</Modal.Header>
       <NoteForm note={note} setOpen={setOpen} />
     </Modal>
   );

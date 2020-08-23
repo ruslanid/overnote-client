@@ -7,7 +7,6 @@ import "./Notes.scss";
 
 import Note from "../note/Note";
 import NoteModal from "../note-modal/NoteModal";
-import NewNoteModal from "../new-note-modal/NewNoteModal";
 
 import { selectFilteredNotes } from "../../redux/notes/notesSelectors";
 import { selectActiveCategory } from "../../redux/categories/categoriesSelectors";
@@ -17,7 +16,7 @@ const Notes = ({ notes, category: { title } }) => (
     <Header as="h2" color="grey">
       {Boolean(title) ? title : "All Notes"}
     </Header>
-    <NewNoteModal
+    <NoteModal
       trigger={
         <Button color="blue" floating="right">
           New Note
