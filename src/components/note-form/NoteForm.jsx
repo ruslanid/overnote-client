@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Button, Icon, Modal, Form } from "semantic-ui-react";
-import { saveNote } from "../../redux/notes/notesActions";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import { selectActiveCategory } from "../../redux/categories/categoriesSelectors";
 import { selectErrorsSaving } from "../../redux/notes/notesSelectors";
+import { addNote, updateNote } from "../../redux/notes/notesActions";
+
 
 const NoteForm = ({ note, dispatch, category, setOpen, errors }) => {
   const [noteData, setNoteData] = useState({
+    id: note?.id || 0,
     title: note?.title || "",
     description: note?.description || "",
   });
@@ -22,7 +24,7 @@ const NoteForm = ({ note, dispatch, category, setOpen, errors }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(saveNote(noteData, category));
+    note ? dispatch(updateNote(noteData)) : dispatch(addNote(noteData, category));
   };
 
   const deleteNote = () => {};

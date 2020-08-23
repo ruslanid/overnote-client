@@ -50,17 +50,24 @@ const saveNoteFailure = (error) => ({
   payload: error,
 });
 
-export const saveNote = (note, category) => {
+export const addNote = (note, category) => {
   return (dispatch) => {
     dispatch(saveNoteStart());
 
     axios
       .post(`/api/categories/${category.id}/notes`, note)
-      .then((res) => {
-        dispatch(saveNoteSuccess(res.data));
-      })
-      .catch((error) => {
-        dispatch(saveNoteFailure(error.response.data));
-      });
+      .then((res) => dispatch(saveNoteSuccess(res.data)))
+      .catch((error) => dispatch(saveNoteFailure(error.response.data)));
+  };
+};
+
+export const updateNote = (note) => {
+  return (dispatch) => {
+    dispatch(saveNoteStart());
+
+    axios
+      .put(`/api/notes/${note.id}`, note)
+      .then((res) => dispatch(saveNoteSuccess(res.data)))
+      .catch((error) => dispatch(saveNoteFailure(error.response.data)));
   };
 };

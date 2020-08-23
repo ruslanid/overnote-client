@@ -102,9 +102,7 @@ export const updateCategory = (category) => {
 
     axios
       .put(`/api/categories/${category.id}`, category)
-      .then((res) => {
-        dispatch(updateCategorySuccess(res.data));
-      })
+      .then((res) => dispatch(updateCategorySuccess(res.data)))
       .catch((error) => dispatch(updateCategoryFailure(error.response.data)));
   };
 };
