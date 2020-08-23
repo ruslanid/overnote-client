@@ -14,3 +14,8 @@ export const selectFilteredNotes = createSelector(
         );
   }
 );
+
+export const selectErrorsSaving = createSelector(
+  [selectNotes],
+  (notes) => notes.errorsSaving
+);

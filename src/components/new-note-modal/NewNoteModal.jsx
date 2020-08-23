@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal } from "semantic-ui-react";
 import NoteForm from "../note-form/NoteForm";
 
 const NewNoteModal = ({ trigger }) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Modal closeIcon trigger={trigger}>
+    <Modal
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+      open={open}
+      trigger={trigger}
+    >
       <Modal.Header>New Note</Modal.Header>
-      <NoteForm />
+      <NoteForm setOpen={setOpen} />
     </Modal>
   );
 };

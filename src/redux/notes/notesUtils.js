@@ -1,9 +1,9 @@
 export const saveNote = (notes, noteToSave) => {
-  var oldNotes = notes[noteToSave.category.title];
-  if (!oldNotes) oldNotes = [];
+  const noteExists = notes.find((note) => note.id === noteToSave.id);
 
-  return {
-    ...notes,
-    [noteToSave.category.title]: [...oldNotes, noteToSave],
-  };
+  if (noteExists) {
+    return notes.map((note) => (note.id === noteToSave.id ? noteToSave : note));
+  } else {
+    return [...notes, noteToSave];
+  }
 };

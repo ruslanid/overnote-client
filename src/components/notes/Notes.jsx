@@ -17,13 +17,15 @@ const Notes = ({ notes, category: { title } }) => (
     <Header as="h2" color="grey">
       {Boolean(title) ? title : "All Notes"}
     </Header>
-    <NewNoteModal
-      trigger={
-        <Button color="blue" floating="right">
-          New Note
-        </Button>
-      }
-    />
+    {title && (
+      <NewNoteModal
+        trigger={
+          <Button color="blue" floating="right">
+            New Note
+          </Button>
+        }
+      />
+    )}
     {notes.length === 0 && <div>No notes</div>}
     <Card.Group>
       {notes.map((note) => (
