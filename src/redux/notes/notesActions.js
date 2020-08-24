@@ -40,9 +40,9 @@ const saveNoteStart = () => ({
   type: NotesActionTypes.SAVE_NOTE_START,
 });
 
-const saveNoteSuccess = (notes) => ({
+const saveNoteSuccess = (note) => ({
   type: NotesActionTypes.SAVE_NOTE_SUCCESS,
-  payload: notes,
+  payload: note,
 });
 
 const saveNoteFailure = (error) => ({
@@ -69,5 +69,33 @@ export const updateNote = (note) => {
       .put(`/api/notes/${note.id}`, note)
       .then((res) => dispatch(saveNoteSuccess(res.data)))
       .catch((error) => dispatch(saveNoteFailure(error.response.data)));
+  };
+};
+
+//
+// DELETE NOTE
+//
+const deleteNoteStart = () => ({
+  type: NotesActionTypes.DELETE_NOTE_START,
+});
+
+const deleteNoteSuccess = (note) => ({
+  type: NotesActionTypes.DELETE_NOTE_SUCCESS,
+  payload: note,
+});
+
+const deleteNoteFailure = (error) => ({
+  type: NotesActionTypes.DELETE_NOTE_FAILURE,
+  payload: error,
+});
+
+export const deleteNote = (note) => {
+  return (dispatch) => {
+    dispatch(deleteNoteStart());
+
+    axios
+      .delete(`/api/notes/${note.id}`)
+      .then((res) => dispatch(deleteNoteSuccess(note)))
+      .then((error) => dispatch(deleteNoteFailure(error.response.data)));
   };
 };

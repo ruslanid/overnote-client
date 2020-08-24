@@ -5,8 +5,11 @@ import { createStructuredSelector } from "reselect";
 
 import { selectActiveCategory } from "../../redux/categories/categoriesSelectors";
 import { selectErrorsSaving } from "../../redux/notes/notesSelectors";
-import { addNote, updateNote } from "../../redux/notes/notesActions";
-
+import {
+  addNote,
+  updateNote,
+  deleteNote,
+} from "../../redux/notes/notesActions";
 
 const NoteForm = ({ note, dispatch, category, setOpen, errors }) => {
   const [noteData, setNoteData] = useState({
@@ -24,10 +27,10 @@ const NoteForm = ({ note, dispatch, category, setOpen, errors }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    note ? dispatch(updateNote(noteData)) : dispatch(addNote(noteData, category));
+    note
+      ? dispatch(updateNote(noteData))
+      : dispatch(addNote(noteData, category));
   };
-
-  const deleteNote = () => {};
 
   return (
     <>
@@ -55,7 +58,11 @@ const NoteForm = ({ note, dispatch, category, setOpen, errors }) => {
       </Modal.Content>
       <Modal.Actions>
         {note && (
-          <Button floated="left" onClick={() => deleteNote(false)} color="red">
+          <Button
+            floated="left"
+            onClick={() => dispatch(deleteNote(note))}
+            color="red"
+          >
             <Icon name="trash" />
             Delete
           </Button>

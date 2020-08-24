@@ -85,7 +85,6 @@ const categoriesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isDeleting: false,
-        activeCategory: {},
         allCategories: deleteCategory(state.allCategories, action.payload),
       };
     case CategoriesActionTypes.DELETE_CATEGORY_FAILURE:

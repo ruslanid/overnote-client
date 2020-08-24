@@ -5,8 +5,10 @@ const INITIAL_STATE = {
   allNotes: [],
   isAdding: false,
   isFetching: false,
+  isDeleting: false,
   errorsSaving: {},
   errorsFetching: {},
+  errorsDeleting: {},
 };
 
 const notesReducer = (state = INITIAL_STATE, action) => {
@@ -47,6 +49,24 @@ const notesReducer = (state = INITIAL_STATE, action) => {
         isFetching: false,
         errorsFetching: action.payload,
       };
+    case NotesActionTypes.DELETE_NOTE_START:
+      return {
+        ...state,
+        isDeleting: true,
+        errorsDeleting: {},
+      };
+    case NotesActionTypes.DELETE_NOTE_SUCCESS:
+      return {
+        ...state,
+        isDeleting: false,
+        allNotes: state.allNotes.filter((note) => note !== action.payload),
+      };
+    case NotesActionTypes.DELETE_NOTE_FAILURE:
+      return {
+        ...state,
+        isDeleting: false,
+        errorsDeleting: action.payload
+      }
     default:
       return state;
   }

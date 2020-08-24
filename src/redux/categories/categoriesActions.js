@@ -33,8 +33,10 @@ export const fetchCategories = () => {
     axios
       .get("/api/categories")
       .then((res) => {
-        dispatch(fetchCategoriesSuccess([{id: 0, title: "All Notes"}, ...res.data]));
-        dispatch(setActiveCategory({id: 0, title: "All Notes"}));
+        dispatch(
+          fetchCategoriesSuccess([{ id: 0, title: "All Notes" }, ...res.data])
+        );
+        dispatch(setActiveCategory({ id: 0, title: "All Notes" }));
       })
       .catch((error) => dispatch(fetchCategoriesFailure(error.response.data)));
   };
@@ -130,7 +132,10 @@ export const deleteCategory = (category) => {
 
     axios
       .delete(`/api/categories/${category.id}`)
-      .then((res) => dispatch(deleteCategorySuccess(category)))
+      .then((res) => {
+        dispatch(deleteCategorySuccess(category));
+        dispatch(setActiveCategory({id: 0, title: "All Notes"}));
+      })
       .catch((error) => dispatch(deleteCategoryFailure(error.response.data)));
   };
 };
