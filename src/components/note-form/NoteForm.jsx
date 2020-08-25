@@ -9,7 +9,11 @@ import {
   selectIsSaving,
   selectIsDeleting,
 } from "../../redux/notes/notesSelectors";
-import { addNote, updateNote } from "../../redux/notes/notesActions";
+import {
+  addNote,
+  updateNote,
+  deleteNote,
+} from "../../redux/notes/notesActions";
 
 const NoteForm = ({
   note,
@@ -68,15 +72,10 @@ const NoteForm = ({
         {note && (
           <Button
             floated="left"
-<<<<<<< HEAD
+            color="red"
             onClick={() => dispatch(deleteNote(note))}
-            color="red"
-=======
-            onClick={() => deleteNote(false)}
-            color="red"
             disabled={isDeleting}
             loading={isDeleting}
->>>>>>> Add loading indicator to async buttons
           >
             <Icon name="trash" />
             Delete
