@@ -13,9 +13,9 @@ const Trigger = () => (
 const TopBar = () => (
   <Menu className="TopBar">
     <Menu.Item>
-      <span>
+      <span className="logo">
         <Icon name="bug" />
-        Overnote!
+        Overnote
       </span>
     </Menu.Item>
     <Menu.Menu position="right">
