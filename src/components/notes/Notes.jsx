@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Header } from "semantic-ui-react";
+import { Button, Card, Header, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -19,6 +19,7 @@ const Notes = ({ notes, category: { title } }) => (
     <NoteModal
       trigger={
         <Button color="blue" floating="right">
+          <Icon name="plus" />
           New Note
         </Button>
       }

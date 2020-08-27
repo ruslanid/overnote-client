@@ -19,3 +19,13 @@ export const selectErrorsSaving = createSelector(
   [selectNotes],
   (notes) => notes.errorsSaving
 );
+
+export const selectIsSaving = createSelector(
+  [selectNotes],
+  (notes) => notes.isSaving
+);
+
+export const selectIsDeleting = createSelector(
+  [selectNotes],
+  (notes) => notes.isDeleting
+);

@@ -4,14 +4,26 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import { selectActiveCategory } from "../../redux/categories/categoriesSelectors";
-import { selectErrorsSaving } from "../../redux/notes/notesSelectors";
+import {
+  selectErrorsSaving,
+  selectIsSaving,
+  selectIsDeleting,
+} from "../../redux/notes/notesSelectors";
 import {
   addNote,
   updateNote,
   deleteNote,
 } from "../../redux/notes/notesActions";
 
-const NoteForm = ({ note, dispatch, category, setOpen, errors }) => {
+const NoteForm = ({
+  note,
+  dispatch,
+  category,
+  setOpen,
+  errors,
+  isSaving,
+  isDeleting,
+}) => {
   const [noteData, setNoteData] = useState({
     id: note?.id || 0,
     title: note?.title || "",
@@ -36,7 +48,7 @@ const NoteForm = ({ note, dispatch, category, setOpen, errors }) => {
     <>
       <Modal.Content>
         <Modal.Description>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} autoComplete="off">
             <Form.Input
               error={errors.title}
               name="title"
@@ -60,8 +72,10 @@ const NoteForm = ({ note, dispatch, category, setOpen, errors }) => {
         {note && (
           <Button
             floated="left"
-            onClick={() => dispatch(deleteNote(note))}
             color="red"
+            onClick={() => dispatch(deleteNote(note))}
+            disabled={isDeleting}
+            loading={isDeleting}
           >
             <Icon name="trash" />
             Delete
@@ -71,7 +85,12 @@ const NoteForm = ({ note, dispatch, category, setOpen, errors }) => {
           <Icon name="remove" />
           Cancel
         </Button>
-        <Button onClick={handleSubmit} color="blue">
+        <Button
+          onClick={handleSubmit}
+          color="blue"
+          loading={isSaving}
+          disabled={isSaving}
+        >
           <Icon name="save" />
           Save
         </Button>
@@ -83,6 +102,8 @@ const NoteForm = ({ note, dispatch, category, setOpen, errors }) => {
 const mapStateToProps = createStructuredSelector({
   category: selectActiveCategory,
   errors: selectErrorsSaving,
+  isSaving: selectIsSaving,
+  isDeleting: selectIsDeleting,
 });
 
 export default connect(mapStateToProps)(NoteForm);

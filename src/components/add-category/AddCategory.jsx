@@ -28,16 +28,22 @@ const AddCategory = ({ dispatch, isAdding, errors }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="AddCategory">
+    <Form autoComplete="off" onSubmit={handleSubmit} className="AddCategory">
       <Form.Input
-        action={{ type: "submit", content: "Save", color: "blue" }}
+        error={errors.title}
+        action={{
+          icon: "save",
+          type: "submit",
+          content: "Save",
+          loading: isAdding,
+          disabled: isAdding,
+          color: "blue",
+        }}
         placeholder="Add category..."
-        disabled={isAdding}
         name="title"
         value={category.title}
         onChange={handleChange}
       />
-      {errors.title && <p className="errors">{errors.title}</p>}
     </Form>
   );
 };
