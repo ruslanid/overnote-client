@@ -41,3 +41,8 @@ export const selectActiveCategory = createSelector(
   [selectCategories],
   (categories) => categories.activeCategory
 );
+
+export const selectCategory = (id) =>
+  createSelector([selectCategories], (categories) =>
+    categories.allCategories.find((category) => category.id === id)
+  );

@@ -13,10 +13,11 @@ function App() {
     <div className="App">
       <TopBar />
       <Switch>
-        <Route exact path="/" component={DashboardPage} />
+        <Route path="/categories/:id" component={DashboardPage} />
         <Route path="/auth" component={AuthPage} />
         <Route path="/profile" component={ProfilePage} />
-        <Redirect to="/" />
+        <Redirect exact from="/" to="/categories/0" />
+        <Redirect to="/categories/0" />
       </Switch>
     </div>
   );

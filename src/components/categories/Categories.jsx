@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from 'react-router-dom';
 import { Menu, Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -11,7 +12,6 @@ import Category from "../category/Category";
 import {
   deleteCategory,
   toggleEditHidden,
-  setActiveCategory,
 } from "../../redux/categories/categoriesActions";
 
 import {
@@ -27,9 +27,10 @@ const Categories = ({
   dispatch,
   isDeleting,
   editHidden,
+  history,
 }) => {
   const handleItemClick = (error, { name }) => {
-    dispatch(setActiveCategory(name));
+    history.push(`/categories/${name.id}`);
   };
 
   const handleDelete = (category) => {
@@ -74,4 +75,4 @@ const mapStateToPros = createStructuredSelector({
   editHidden: selectEditHidden,
 });
 
-export default connect(mapStateToPros)(Categories);
+export default connect(mapStateToPros)(withRouter(Categories));

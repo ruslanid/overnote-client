@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
 
 import "./DashboardPage.scss";
 
@@ -10,15 +9,25 @@ import WithLoading from "../../components/with-loading/WithLoading";
 
 import { selectFilteredNotes } from "../../redux/notes/notesSelectors";
 import { fetchAllNotes } from "../../redux/notes/notesActions";
-import { fetchCategories } from "../../redux/categories/categoriesActions";
+import {
+  fetchCategories,
+  setActiveCategory,
+} from "../../redux/categories/categoriesActions";
+import { selectCategory } from "../../redux/categories/categoriesSelectors";
 
 const NotesWithLoading = WithLoading(Notes);
 
-const DashboardPage = ({ dispatch, areNotesLoaded }) => {
+const DashboardPage = ({ dispatch, areNotesLoaded, category, match }) => {
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchAllNotes());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (category) {
+      dispatch(setActiveCategory(category));
+    }
+  }, [dispatch, category]);
 
   return (
     <div className="DashboardPage">
@@ -28,8 +37,9 @@ const DashboardPage = ({ dispatch, areNotesLoaded }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  areNotesLoaded: selectFilteredNotes,
+const mapStateToProps = (state, ownProps) => ({
+  areNotesLoaded: selectFilteredNotes(state),
+  category: selectCategory(Number(ownProps.match.params.id))(state),
 });
 
 export default connect(mapStateToProps)(DashboardPage);
