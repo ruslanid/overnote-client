@@ -1,0 +1,9 @@
+.AuthPage {
+  margin-top: calc((100vh / 2) - 150px);
+  width: 100%;
+
+  .ui.segment {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}

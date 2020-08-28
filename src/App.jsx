@@ -11,7 +11,7 @@ import TopBar from "./components/top-bar/TopBar";
 function App() {
   return (
     <div className="App">
-      <TopBar />
+      {/* <TopBar /> */}
       <Switch>
         <Route path="/categories/:id" component={DashboardPage} />
         <Route path="/auth" component={AuthPage} />
