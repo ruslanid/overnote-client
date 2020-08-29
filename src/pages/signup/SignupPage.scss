@@ -1,0 +1,15 @@
+.SignupPage {
+  width: 100%;
+
+  .ui.segment {
+    max-width: 500px;
+    margin: 150px auto 0;
+    padding: 30px 15px;
+  }
+
+  .signup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
